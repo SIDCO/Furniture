@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+   <link href="favicon.ico" rel="icon" type="image/x-icon" />
+   <title>A3dsViewer WebGL - first</title>
+	<style>
+         body {
+            margin: 0px;
+            background-color: 0x000000;
+            overflow: hidden;
+         }
+	</style>
+</head>
+<body>
+   <script src="three.min.js"></script>
+   <script src="TrackballControls.js"></script>
+   <script src="model.js"></script>
+   <script>
+   /**
+ ** FileName : 	Algo.js
+ ** Author	:	Siddharth Bagai
+ ** Description	:	Implementa all algorithms like Stress Major, Label repulsion
+ **					Also provides symmetrix matrix implementation
+ ** Date		:	06/12/2014
+ **/
+      var camera, scene, renderer;
+      var light;
+      var controls;
+
+      init();
+      animate();
+
+      function init() {
+
+         renderer = new THREE.WebGLRenderer();
+         renderer.setSize(window.innerWidth, window.innerHeight);
+         document.body.appendChild(renderer.domElement);
+         renderer.setClearColor(0xF0F0F0, 1);
+
+         camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 487.500,  68250.000);
+         camera.position.x = 1625.000;
+         camera.position.y = -1500.000;
+         camera.position.z = 1900.000;
+         camera.up = new THREE.Vector3(0, 0, 1);
+         var target = new THREE.Vector3(0.000, 0.000, 0.000);
+         camera.lookAt(target);
+
+         controls = new THREE.TrackballControls(camera);
+         controls.addEventListener( 'change', render);
+
+         scene = new THREE.Scene();
+/*
+         light = new THREE.PointLight(0x999999);
+         light.position.set(975.000, -1300.000, 1950.000);
+         scene.add(light);
+         light = new THREE.PointLight(0x4C4C4C);
+         light.position.set(-1300.000, -1300.000, 975.000);
+         scene.add(light);
+         light = new THREE.PointLight(0x4C4C4C);
+         light.position.set(0.000, 1300.000, 1300.000);
+         scene.add(light);
+*/
+		var light = new THREE.PointLight(0xffffff);
+		light.position.set(0,10000,10000);
+		scene.add(light);
+		
+		var light2 = new THREE.AmbientLight(0x444444);
+		scene.add(light2);
+	
+		var lightbulb = new THREE.Mesh( 
+		new THREE.SphereGeometry( 10, 16, 8 ), 
+		new THREE.MeshBasicMaterial( { color: 0xffaa00 } )
+		);
+		scene.add( lightbulb );
+		lightbulb.position = light.position;
+	
+	
+         create_geometry_0(scene);
+         create_geometry_1(scene);
+         create_geometry_2(scene);
+         create_geometry_3(scene);
+         create_geometry_4(scene);
+         create_geometry_5(scene);
+         create_geometry_6(scene);
+         create_geometry_7(scene);
+         create_geometry_8(scene);
+         create_geometry_9(scene);
+         create_geometry_10(scene);
+         create_geometry_11(scene);
+         create_geometry_12(scene);
+         create_geometry_13(scene);
+         create_geometry_14(scene);
+         create_geometry_15(scene);
+         create_geometry_16(scene);
+         create_geometry_17(scene);
+         create_geometry_18(scene);
+         create_geometry_19(scene);
+         create_geometry_20(scene);
+         create_geometry_21(scene);
+         create_geometry_22(scene);
+         create_geometry_23(scene);
+
+         window.addEventListener('resize', onWindowResize, false);
+      }
+
+      function onWindowResize() {
+
+         camera.aspect = window.innerWidth / window.innerHeight;
+         camera.updateProjectionMatrix();
+
+         renderer.setSize(window.innerWidth, window.innerHeight);
+
+         controls.handleResize();
+         render();
+      }
+
+      function animate()
+      {
+         requestAnimationFrame(animate);
+         renderer.render(scene, camera);
+         controls.update();
+      }
+
+      function render()
+      {
+         renderer.render(scene, camera);
+      }
+</script>
+</body>
+</html>
